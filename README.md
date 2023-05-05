@@ -21,13 +21,20 @@
 - Get Any Book By Name/Author/title/subject
 - Add to Reading List Functionality.
 - Search Functionality.
+- Deployed On verce - https://big-circle.vercel.app/
 <br />
 
 ## 🚀 How To Use It Locally
 - Clone Repo --- git clone https://github.com/ganeshbahire01/BigCircle.git .
 - Change directory --- cd front .
-- Install All Dependecies --- npm i 
+- ** Note -- Your node version must be --- v18.14.2
+- Install All Dependecies --- npm i .
 - Run Locally use --- npm run dev.
 - It's Start Server on Port number 3000
 - So in Browser use   --- http://localhost:3000/ .
 <br />
+
+## 🚀 Sign Up Page
+![Screenshot 2023-05-05 143340](https://user-images.githubusercontent.com/64640371/236418457-464a3fe4-f827-465b-b81e-604cc9cc50f4.png)
+
+
