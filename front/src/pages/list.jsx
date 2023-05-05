@@ -23,8 +23,18 @@ const List = () => {
       setLoading(false);
     } catch (error) {}
   };
+  const Auhtnticate = () => {
+    let token = localStorage.getItem("token");
+    let user = JSON.parse(localStorage.getItem("user"));
+    // if user is undefined or token is undefined that means user is not login so we return user to /login page
+    if (!token && !user) {
+      router.push("/login");
+      return;
+    }
+  };
   let FakeArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   useEffect(() => {
+    Auhtnticate();
     getList();
   }, []);
   return (
