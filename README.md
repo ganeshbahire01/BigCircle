@@ -21,7 +21,7 @@
 - Get Any Book By Name/Author/title/subject
 - Add to Reading List Functionality.
 - Search Functionality.
-- Deployed On verce - https://big-circle.vercel.app/
+- Deployed On vercel - https://big-circle.vercel.app/
 <br />
 
 ## 🚀 How To Use It Locally
