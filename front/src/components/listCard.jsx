@@ -25,7 +25,10 @@ const ListCard = ({ _id, BookImg, BookTitle, BookAuthor, BookPrice }) => {
   //   BookPrice: Number,
   useEffect(() => {}, []);
   return (
-    <div class="flex border rounded-lg overflow-hidden hover:bg-yellow-600">
+    <div
+      class="flex border rounded-lg overflow-hidden hover:bg-yellow-600"
+      key={_id}
+    >
       <img class="w-1/3" src={BookImg} alt="Book cover" />
       <div class="p-4 w-2/3">
         <h2 class="font-bold text-lg mb-2"> {BookTitle}</h2>

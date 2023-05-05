@@ -61,8 +61,9 @@ const List = () => {
         >
           {/* Map Over the Data and render it on DOM  */}
           {loading
-            ? FakeArray.map((el) => <Skeleton />)
-            : list.length > 0 && list.map((book) => <ListCard {...book} />)}
+            ? FakeArray.map((el) => <Skeleton key={el} />)
+            : list.length > 0 &&
+              list.map((book, i) => <ListCard {...book} key={i} />)}
         </div>
       </div>
     </div>

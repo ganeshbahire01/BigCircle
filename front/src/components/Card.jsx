@@ -35,6 +35,7 @@ const Card = ({ volumeInfo, saleInfo }) => {
       <div
         class="flex border rounded-lg overflow-hidden hover:bg-yellow-100"
         style={{ boxShadow: "rgba(0, 0, 0, 0.15)" }}
+        key={amount * Math.random()}
       >
         <img class="w-1/3" src={imgurl} alt="Book cover" />
         <div class="p-4 w-2/3">

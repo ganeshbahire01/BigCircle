@@ -1,11 +1,12 @@
 import React from "react";
 
-const Skeleton = () => {
+const Skeleton = ({el}) => {
     // Skeleton code
   return (
     <div
       role="status"
       class="space-y-8 animate-pulse md:space-y-0 md:space-x-8 md:flex md:items-center"
+      key={el}
     >
       <div class="flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
         <svg

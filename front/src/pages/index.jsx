@@ -159,8 +159,8 @@ const Books = () => {
         >
           {/* Map On Data to Show on DOM */}
           {loading
-            ? FakeArray.map((el) => <Skeleton />)
-            : books?.length >= 0 && books?.map((book) => <Card {...book} />)}
+            ? FakeArray.map((el) => <Skeleton key={el} />)
+            : books?.length >= 0 && books?.map((book,i) => <Card {...book} key={i} />)}
           {books?.length == 0 ? "No books available" : ""}
         </div>
       </div>
