@@ -3,10 +3,22 @@ import ListCard from "@/components/listCard";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { FaArrowLeft } from "react-icons/fa";
 const List = () => {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const Auhtnticate = () => {
+    let token = localStorage.getItem("token");
+    let user = JSON.parse(localStorage.getItem("user"));
+    // if user is undefined or token is undefined that means user is not login so we return user to /login page
+    if (!token && !user) {
+      router.push("/login");
+    } else {
+      getList();
+    }
+  };
   const getList = async () => {
     let user = JSON.parse(localStorage.getItem("user"));
     // we need user ID for getting Perticular users Reading Books list we get that from local storage
@@ -23,19 +35,10 @@ const List = () => {
       setLoading(false);
     } catch (error) {}
   };
-  const Auhtnticate = () => {
-    let token = localStorage.getItem("token");
-    let user = JSON.parse(localStorage.getItem("user"));
-    // if user is undefined or token is undefined that means user is not login so we return user to /login page
-    if (!token && !user) {
-      router.push("/login");
-      return;
-    }
-  };
+
   let FakeArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   useEffect(() => {
     Auhtnticate();
-    getList();
   }, []);
   return (
     <div>
