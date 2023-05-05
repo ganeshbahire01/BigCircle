@@ -1,6 +1,7 @@
 import Skeleton from "@/components/Skeleton";
 import ListCard from "@/components/listCard";
 import axios from "axios";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 const List = () => {
@@ -40,17 +41,18 @@ const List = () => {
           My Reading List
         </div>
 
-        <a
+        <Link
           href="/"
           style={{
             fontSize: "25px",
             fontWeight: "bold",
+
             alignItems: "center",
           }}
           class="flex text-green-600 hover:text-green-800"
         >
           <FaArrowLeft class="m-2" /> Go Back
-        </a>
+        </Link>
       </div>
       <div class="mt-20">
         <div

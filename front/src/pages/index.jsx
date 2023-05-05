@@ -5,6 +5,7 @@ import { GoSearch } from "react-icons/go";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useRouter } from "next/router";
 import Skeleton from "@/components/Skeleton";
+import Link from "next/link";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -81,11 +82,16 @@ const Books = () => {
               <ul>
                 <li>{user.email}</li>
                 <hr />
-                <button onClick={() => router.push("/list")} style={{marginTop:"10px"}}>
+                <button
+                  onClick={() => router.push("/list")}
+                  style={{ marginTop: "10px" }}
+                >
                   My Read List
                 </button>
                 <hr />
-                <button onClick={Logout} style={{marginTop:"10px"}}>Logout</button>
+                <button onClick={Logout} style={{ marginTop: "10px" }}>
+                  Logout
+                </button>
               </ul>
             </div>
           </div>
@@ -103,9 +109,9 @@ const Books = () => {
           </div>
         </div>
         <div>
-          <a href="/list">
+          <Link href="/list">
             <AiOutlineHeart size={"30px"} class="ml-5" />
-          </a>
+          </Link>
         </div>
       </div>
       <div
@@ -174,29 +180,29 @@ const Books = () => {
           <div class="sm:flex sm:items-center sm:justify-between">
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-black-100  sm:mb-0 ">
               <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">
+                <Link href="#" class="mr-4 hover:underline md:mr-6 ">
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6">
+                <Link href="#" class="mr-4 hover:underline md:mr-6">
                   Feature
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">
+                <Link href="#" class="mr-4 hover:underline md:mr-6 ">
                   Pricing
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">
+                <Link href="#" class="mr-4 hover:underline md:mr-6 ">
                   Gallary
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">
+                <Link href="#" class="mr-4 hover:underline md:mr-6 ">
                   Team
-                </a>
+                </Link>
               </li>
             </ul>
             <div>
@@ -219,24 +225,24 @@ const Books = () => {
           <div class="sm:flex sm:items-center sm:justify-between">
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-black-100 sm:mb-0">
               <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">
+                <Link href="#" class="mr-4 hover:underline md:mr-6 ">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6">
+                <Link href="#" class="mr-4 hover:underline md:mr-6">
                   Terms Of Use
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">
+                <Link href="#" class="mr-4 hover:underline md:mr-6 ">
                   Sales And Refund
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">
+                <Link href="#" class="mr-4 hover:underline md:mr-6 ">
                   Legal
-                </a>
+                </Link>
               </li>
             </ul>
             <div>

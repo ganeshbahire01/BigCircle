@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -125,12 +126,12 @@ const Login = () => {
 
           <p class="mt-10 text-center text-sm text-black-500">
             Dont Have Account ?
-            <a
+            <Link
               href="/signup"
               class="font-semibold leading-6 text-indigo-600 hover:text-green-500"
             >
               Create New Account
-            </a>
+            </Link>
           </p>
         </div>
       </div>

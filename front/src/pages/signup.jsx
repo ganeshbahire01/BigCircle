@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
@@ -135,12 +136,12 @@ const SignUp = () => {
 
           <p class="mt-10 text-center text-sm text-gray-500">
             Alredy Account ?
-            <a
+            <Link
               href="/login"
               class="font-semibold leading-6 text-indigo-600 hover:text-green-500"
             >
               Login Here
-            </a>
+            </Link>
           </p>
         </div>
       </div>
