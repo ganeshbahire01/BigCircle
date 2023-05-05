@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import axios from "axios";
 const Card = ({ volumeInfo, saleInfo }) => {
+  // we need Both value so we use condition if both are present Because in some Books Data the image and price are not shown so that time UI will be distrubated
+  // if both are present then only shown on Dom else not
   let imgurl = volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail;
   let amount = saleInfo.listPrice && saleInfo.listPrice.amount;
   const [loading, setLoading] = useState(false);
@@ -30,6 +32,7 @@ const Card = ({ volumeInfo, saleInfo }) => {
     }
   };
   useEffect(() => {}, []);
+  // if both are present then
   if (imgurl && amount) {
     return (
       <div

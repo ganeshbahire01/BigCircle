@@ -64,6 +64,7 @@ const List = () => {
             ? FakeArray.map((el) => <Skeleton key={el} />)
             : list.length > 0 &&
               list.map((book, i) => <ListCard {...book} key={i} />)}
+          {list.length == 0 ? "Your List Is Empty Add Book In List" : ""}
         </div>
       </div>
     </div>
