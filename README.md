@@ -34,6 +34,12 @@
 - So in Browser use   --- http://localhost:3000/ .
 <br />
 
+## 🚀 Credentials
+- Create New Account OR use.
+- email:- ganesh@gmail.com
+- password:- ganesh
+<br />
+
 ## 🚀 Sign Up Page
 ![Screenshot 2023-05-05 143340](https://user-images.githubusercontent.com/64640371/236418457-464a3fe4-f827-465b-b81e-604cc9cc50f4.png)
 
