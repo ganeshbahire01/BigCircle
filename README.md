@@ -4,19 +4,30 @@
 
 <br />
 <p align="center">
-    <img src="https://img.shields.io/badge/NextJs-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="reactjs" />
+    <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="chakra-ui" />
     <img src="https://img.shields.io/badge/Telwind-20232A?style=for-the-badge&logo=telwind&logoColor=61DAFB" alt="reactjs" />
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="chakra-ui"/>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="chakra-ui"/>
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="chakra-ui"/>
+     <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="nodejs" />
+    <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="expressjs" />
+    <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="mongodb" />
 </p>
-<h3 align="center"><a href="https://next-hill-6732.vercel.app/"><strong>Want to see live preview »</strong></a></h3>
+<h3 align="center"><a href="https://big-circle.vercel.app/"><strong>Want to see live preview »</strong></a></h3>
 
 ## 🚀 Features
-- Sign Up/Login authentication made with Firebase and Sign in with Google Funtionality.
-- Product Page with filter, sorting functionality.
-- Cart Funtionality, Shipping, Payment.
-- Admin panel with CRUD functionality.
+- Sign Up/Login authentication .
+- Books Page .
+- Get Any Book By Name/Author/title/subject
+- Add to Reading List Functionality.
 - Search Functionality.
-- Real time tracking of Traffic in website.
+<br />
+
+## 🚀 How To Use It Locally
+- Clone Repo --- git clone {repo link} .
+- Change directory --- cd front .
+- Install All Dependecies --- npm i 
+- Run Locally use --- npm run dev.
+- It's Start Server on Port number 3000
+- So in Browser use   --- http://localhost:3000/ .
 <br />
