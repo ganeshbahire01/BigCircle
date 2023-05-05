@@ -24,7 +24,7 @@
 <br />
 
 ## 🚀 How To Use It Locally
-- Clone Repo --- git clone {repo link} .
+- Clone Repo --- git clone https://github.com/ganeshbahire01/BigCircle.git .
 - Change directory --- cd front .
 - Install All Dependecies --- npm i 
 - Run Locally use --- npm run dev.
