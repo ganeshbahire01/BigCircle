@@ -5,40 +5,59 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { FaArrowLeft } from "react-icons/fa";
-const List = () => {
+const List = ({ res }) => {
   const [list, setList] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const Auhtnticate = () => {
+  // const Auhtnticate = () => {
+  //   let token = localStorage.getItem("token");
+  //   let user = JSON.parse(localStorage.getItem("user"));
+  //   // if user is undefined or token is undefined that means user is not login so we return user to /login page
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1500);
+  //   if (!token && !user) {
+  //     router.push("/login");
+  //   } else {
+  //     // getList();
+  //     router.push(`/list?id=${user._id}&token=${token}`);
+  //   }
+  // };
+  // const getList = async () => {
+  //   let user = JSON.parse(localStorage.getItem("user"));
+  //   // we need user ID for getting Perticular users Reading Books list we get that from local storage
+  //   let userID = user._id;
+  //   try {
+  //     setLoading(true);
+  //     //   Fetch the list of books by that user ID
+  //     let response = await axios.get(
+  //       `https://exuberant-battledress-clam.cyclic.app/books/${userID}`
+  //     );
+  //     console.log(response.data);
+  //     //   store that in data
+  //     setList(response.data);
+  //     setLoading(false);
+  //   } catch (error) {}
+  // };
+
+  let FakeArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  useEffect(() => {
+    // Auhtnticate();
     let token = localStorage.getItem("token");
     let user = JSON.parse(localStorage.getItem("user"));
     // if user is undefined or token is undefined that means user is not login so we return user to /login page
+    // setLoading(true);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 1500);
     if (!token && !user) {
       router.push("/login");
     } else {
-      getList();
+      // getList();
+      router.push(`/list?id=${user._id}&token=${token}`);
     }
-  };
-  const getList = async () => {
-    let user = JSON.parse(localStorage.getItem("user"));
-    // we need user ID for getting Perticular users Reading Books list we get that from local storage
-    let userID = user._id;
-    try {
-      setLoading(true);
-      //   Fetch the list of books by that user ID
-      let response = await axios.get(
-        `https://exuberant-battledress-clam.cyclic.app/books/${userID}`
-      );
-      console.log(response.data);
-      //   store that in data
-      setList(response.data);
-      setLoading(false);
-    } catch (error) {}
-  };
-
-  let FakeArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  useEffect(() => {
-    Auhtnticate();
   }, []);
   return (
     <div>
@@ -75,9 +94,9 @@ const List = () => {
           {/* Map Over the Data and render it on DOM  */}
           {loading
             ? FakeArray.map((el) => <Skeleton key={el} />)
-            : list.length > 0 &&
-              list.map((book, i) => <ListCard {...book} key={i} />)}
-          {list.length == 0 ? "Your List Is Empty Add Book In List" : ""}
+            : res.length > 0 &&
+              res.map((book, i) => <ListCard {...book} key={i} />)}
+          {res.length == 0 ? "Your List Is Empty Add Book In List" : ""}
         </div>
       </div>
     </div>
@@ -85,3 +104,26 @@ const List = () => {
 };
 
 export default List;
+
+export const getServerSideProps = async (context) => {
+  let query = context.query;
+  console.log(query);
+  if (query.id && query.token) {
+    let response = await axios.get(
+      `https://exuberant-battledress-clam.cyclic.app/books/${query.id}`,
+      {
+        headers: {
+          Authorization: query.token,
+        },
+      }
+    );
+    const res = response.data;
+    return {
+      props: { res },
+    };
+  } else {
+    return {
+      props: { res: [] },
+    };
+  }
+};

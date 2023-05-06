@@ -6,14 +6,18 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { useRouter } from "next/router";
 import Skeleton from "@/components/Skeleton";
 import Link from "next/link";
+import axios from "axios";
 
-const Books = () => {
+const Books = ({ res }) => {
   const [books, setBooks] = useState([]);
   const [inputVal, setInpuVal] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [user, setUSer] = useState([]);
   const router = useRouter();
+  // setBooks(res);
+
+  console.log(res);
   const Auhtnticate = () => {
     let token = localStorage.getItem("token");
     let user = JSON.parse(localStorage.getItem("user"));
@@ -24,6 +28,8 @@ const Books = () => {
     }
     setUSer(user);
   };
+  // Auhtnticate();
+  // router.push(`/${inputVal}`);
   // Fake Array for maping Skeleton Functionality
   let FakeArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const Logout = () => {
@@ -32,24 +38,31 @@ const Books = () => {
     localStorage.removeItem("user");
     router.push("/login");
   };
-  const fetchBooks = async () => {
-    try {
-      setLoading(true);
-      // Fetch books from Public API by Google
-      let response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${
-          inputVal || "react"
-        }&key=AIzaSyBDmonRsng_AM6DAFxOekx755lkuDu5KqU&maxResults=40`
-      );
-      let data = await response.json();
-      console.log(data.items);
-      setBooks(data.items);
+  const HandelInput = (e) => {
+    setInpuVal(e.target.value);
+    setLoading(true);
+    setTimeout(() => {
+      router.push(`/?q=${e.target.value}`);
       setLoading(false);
-    } catch (error) {}
+    }, 1000);
   };
+  // const fetchBooks = async () => {
+  //   try {
+  //     setLoading(true);
+  //     // Fetch books from Public API by Google
+  //     let response = await fetch(
+  //       `https://www.googleapis.com/books/v1/volumes?q=${
+  //         inputVal || "react"
+  //       }&key=AIzaSyBDmonRsng_AM6DAFxOekx755lkuDu5KqU&maxResults=40`
+  //     );
+  //     let data = await response.json();
+  //     console.log(data.items);
+  //     setBooks(data.items);
+  //     setLoading(false);
+  //   } catch (error) {}
+  // };
   useEffect(() => {
     Auhtnticate();
-    fetchBooks();
     // re-render our dom whenever the input value is changed  for that it depends on the input value
   }, [inputVal]);
   return (
@@ -101,7 +114,7 @@ const Books = () => {
               placeholder="What are you looking for ?"
               className="w-full ml-2 pr-10 pl-12 py-1.5 bg-gray-400 placeholder-gray-500 red-800 rounded-lg border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300 "
               value={inputVal}
-              onChange={(e) => setInpuVal(e.target.value)}
+              onChange={(e) => HandelInput(e)}
             />
             <div className="absolute inset-y-0 left-0 flex items-center pl-4">
               <GoSearch className="w-6 h-6 text-gray-800" />
@@ -160,7 +173,8 @@ const Books = () => {
           {/* Map On Data to Show on DOM */}
           {loading
             ? FakeArray.map((el) => <Skeleton key={el} />)
-            : books?.length >= 0 && books?.map((book,i) => <Card {...book} key={i} />)}
+            : res?.length >= 0 &&
+              res?.map((book, i) => <Card {...book} key={i} />)}
           {books?.length == 0 ? "No books available" : ""}
         </div>
       </div>
@@ -269,3 +283,18 @@ const Books = () => {
 };
 
 export default Books;
+
+export const getServerSideProps = async (context) => {
+  let query = context.query;
+  // setLoading(true);
+  const data = await axios.get(
+    `https://www.googleapis.com/books/v1/volumes?q=${
+      query.q || "react"
+    }&key=AIzaSyBDmonRsng_AM6DAFxOekx755lkuDu5KqU&maxResults=40`
+  );
+  const res = data.data.items;
+  // setLoading(false);
+  return {
+    props: { res },
+  };
+};

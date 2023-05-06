@@ -1,35 +1,21 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-const SignUp = () => {
+const SignUp = ({ user }) => {
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   // email, password, mobile
   const router = useRouter();
-  const SignUpRequest = async (e) => {
-    e.preventDefault();
-    let payload = { email, password, mobile };
-    // Post request that will Register a user and store the data of the user to our DB
-    // It needs payload that will be Schema of the user
-    try {
-      let req = await axios.post(
-        "https://exuberant-battledress-clam.cyclic.app/users/register",
-        payload
-      );
-      // console.log(req.data);
-      alert(req.data.message);
-      // if we get in response that Registration successful means user is registerd now go to login else it has already been registered
-
-      if (req.data.message === "Registration successful") {
+  useEffect(() => {
+    if (user != null) {
+      alert(user.message);
+      if (user.message == "Registration successful") {
         router.push("/login");
       }
-    } catch (error) {
-      console.error(error);
     }
-    // console.log(email, password);
-  };
+  }, []);
   return (
     <div style={{ position: "relative", height: "100vh" }}>
       <div
@@ -56,7 +42,11 @@ const SignUp = () => {
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" onSubmit={SignUpRequest}>
+          <form
+            class="space-y-6"
+            action={`/signup?email=${email}&password=${password}&mobile=${mobile}`}
+            method="post"
+          >
             <div>
               <label
                 for="email"
@@ -150,3 +140,22 @@ const SignUp = () => {
 };
 
 export default SignUp;
+export const getServerSideProps = async (context) => {
+  let query = context.query;
+  console.log(query);
+  if (query.email && query.password) {
+    let req = await axios.post(
+      "https://exuberant-battledress-clam.cyclic.app/users/register",
+      query
+    );
+    let user = req.data;
+    console.log(user);
+    return {
+      props: { user },
+    };
+  } else {
+    return {
+      props: { user: null },
+    };
+  }
+};

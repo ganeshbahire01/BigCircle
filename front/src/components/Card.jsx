@@ -31,7 +31,6 @@ const Card = ({ volumeInfo, saleInfo }) => {
       console.log(error);
     }
   };
-  useEffect(() => {}, []);
   // if both are present then
   if (imgurl && amount) {
     return (

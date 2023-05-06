@@ -1,40 +1,23 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-const Login = () => {
+const Login = ({ user }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   // email, password, mobile
   const router = useRouter();
-  const SignUpRequest = async (e) => {
-    e.preventDefault();
-    let payload = { email, password };
-    try {
-      setLoading(true);
-      // Login is also a post request in which user need to login by email and password that are basiclly payload
-      let req = await axios.post(
-        "https://exuberant-battledress-clam.cyclic.app/users/login",
-        payload
-      );
-      console.log(req.data);
-      setLoading(false);
-      alert(req.data.message);
-      // after request we get response if response is successful then only we navigate user to home page else not
-      if (req.data.message === "Login successful") {
-        localStorage.setItem("user", JSON.stringify(req.data.owner));
-        localStorage.setItem("token", req.data.token);
-        // Storing token in localStorage and user information that will help us to authenticate and also for saving the Reding list books to DB
-        //  for saving Book to DB we need user id so that id is present in local storage
-        //  also a token for validation
-        router.push("/");
-      }
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    if (user != null && user.message === "Login successful") {
+      localStorage.setItem("user", JSON.stringify(user.owner));
+      localStorage.setItem("token", user.token);
+      // Storing token in localStorage and user information that will help us to authenticate and also for saving the Reding list books to DB
+      //  for saving Book to DB we need user id so that id is present in local storage
+      //  also a token for validation
+      router.push("/");
     }
-    // console.log(email, password);
-  };
+  }, []);
   return (
     <div style={{ position: "relative", height: "100vh" }}>
       <div
@@ -66,7 +49,12 @@ const Login = () => {
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" onSubmit={SignUpRequest}>
+          <form
+            class="space-y-6"
+            // onSubmit={SignUpRequest}
+            action={`/login?email=${email}&password=${password}`}
+            method="post"
+          >
             <div>
               <div class="flex items-center justify-between">
                 <label
@@ -140,3 +128,23 @@ const Login = () => {
 };
 
 export default Login;
+
+export const getServerSideProps = async (context) => {
+  let query = context.query;
+  console.log(query);
+  if (query.email && query.password) {
+    let req = await axios.post(
+      "https://exuberant-battledress-clam.cyclic.app/users/login",
+      query
+    );
+    let user = req.data;
+    // console.log(user);
+    return {
+      props: { user },
+    };
+  } else {
+    return {
+      props: { user: null },
+    };
+  }
+};
