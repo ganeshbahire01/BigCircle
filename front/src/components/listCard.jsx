@@ -7,8 +7,14 @@ const ListCard = ({ _id, BookImg, BookTitle, BookAuthor, BookPrice }) => {
     try {
       setLoading(true);
       //   Delete Request when user hit remove button this api will remove that book details from DB by the help of uniq id
+      let token = localStorage.getItem("token");
       let res = await axios.delete(
-        `https://exuberant-battledress-clam.cyclic.app/books/${_id}`
+        `https://exuberant-battledress-clam.cyclic.app/books/${_id}`,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
       );
       console.log(res.data);
       alert(res.data);

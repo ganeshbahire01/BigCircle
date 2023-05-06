@@ -20,9 +20,15 @@ const Card = ({ volumeInfo, saleInfo }) => {
     try {
       setLoading(true);
       // Post request with payload i.e information of that book that user want to save
+      let token = localStorage.getItem("token");
       let res = await axios.post(
         "https://exuberant-battledress-clam.cyclic.app/books/addBook",
-        payload
+        { payload },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
       );
       console.log(res.data);
       alert(res.data.message);
