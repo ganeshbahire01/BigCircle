@@ -23,9 +23,10 @@ const Card = ({ volumeInfo, saleInfo }) => {
       let token = localStorage.getItem("token");
       let res = await axios.post(
         "https://exuberant-battledress-clam.cyclic.app/books/addBook",
-        { payload },
+        payload,
         {
           headers: {
+            "Content-Type": "application/json",
             Authorization: token,
           },
         }
